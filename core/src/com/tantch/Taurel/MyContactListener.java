@@ -30,6 +30,7 @@ public class MyContactListener implements ContactListener{
 		Fixture fb=contact.getFixtureB();
 		
 		if(fa.getUserData().equals("Cannon")){
+		//	fa.getBody().getPosition().x;
 			fa.getBody().setAngularVelocity(-1);
 		}
 		
