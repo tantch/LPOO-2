@@ -34,14 +34,14 @@ public class Wall extends Obstacle {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.filter.categoryBits = B2DVars.BIT_OBS;
-		fixtureDef.filter.maskBits = B2DVars.BIT_FIBI | B2DVars.BIT_CANNON;
+		fixtureDef.filter.maskBits = B2DVars.BIT_FIBI | B2DVars.BIT_CANNON | B2DVars.BIT_OBS;
 		fixtureDef.restitution = 0f;
 		fixtureDef.friction = 1f;
 		fixtureDef.density = 6;
 
 		body = world.createBody(bodyDef);
 		fixture = body.createFixture(fixtureDef);
-		fixture.setUserData("wall");
+		fixture.setUserData("Wall");
 	}
 
 }

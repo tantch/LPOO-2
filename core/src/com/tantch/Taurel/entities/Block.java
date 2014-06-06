@@ -30,7 +30,7 @@ public class Block extends Obstacle {
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.filter.categoryBits = B2DVars.BIT_OBS;
-		fixtureDef.filter.maskBits = B2DVars.BIT_FIBI | B2DVars.BIT_CANNON;
+		fixtureDef.filter.maskBits = B2DVars.BIT_FIBI | B2DVars.BIT_CANNON | B2DVars.BIT_OBS;
 		fixtureDef.restitution = .8f;
 		fixtureDef.friction = .8f;
 		fixtureDef.density = 6;
