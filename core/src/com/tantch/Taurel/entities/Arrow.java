@@ -16,12 +16,11 @@ public class Arrow {
 	public Body body;
 	private Fixture fixture;
 	private float movementForce = 10000;
-	private float cx, cy;
+	private Sprite arrowSprite;
+	private int frame;
 
-	public Arrow(float x, float y, World world, float ang) {
+	public Arrow(float x, float y, World world, float ang,Texture arrowText) {
 
-		this.cx = x;
-		this.cy = y;
 
 
 		BodyDef bodyDef = new BodyDef();
@@ -42,13 +41,32 @@ public class Arrow {
 
 		body = world.createBody(bodyDef);
 		fixture = body.createFixture(fixtureDef);
-		
 		fixture.setUserData("Stick");
+		 shape = new PolygonShape();
+		shape.setAsBox(0.13f, 0.13f,new Vector2(1.57f,0),0);
+		
+		fixtureDef = new FixtureDef();
+		fixtureDef.shape = shape;
+		fixtureDef.filter.categoryBits = B2DVars.BIT_OBS;
+		fixtureDef.filter.maskBits = B2DVars.BIT_FIBI | B2DVars.BIT_CANNON | B2DVars.BIT_OBS;
+		fixtureDef.restitution = 0.1f;
+		fixtureDef.friction = 0.8f;
+		fixtureDef.density = 0.1f;
+		body.createFixture(fixtureDef).setUserData("Metal");
 		Vector2 forc= new Vector2();
 		forc.x = (float) (Math.cos(ang) * movementForce);
 		forc.y = (float) (Math.sin(ang) * movementForce);
 		body.setTransform(x, y, ang);
 		body.applyForceToCenter(forc, true);
+		
+		arrowSprite = new Sprite(arrowText);
+		arrowSprite.setOrigin(body.getLocalCenter().x+1.5f, body.getLocalCenter().y);
+		arrowSprite.setSize(2.8f,0.4f);
+		arrowSprite.setRegion(5, 6, 75, 10);
+		body.setUserData(arrowSprite);
+		
 
 	}
+
+	
 }

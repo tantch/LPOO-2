@@ -71,7 +71,7 @@ public class MainMenu implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 
 				((Game) Gdx.app.getApplicationListener())
-						.setScreen(new MovementTestScreen());
+						.setScreen(new GameScreen());
 
 			}
 		});
@@ -135,7 +135,7 @@ public class MainMenu implements Screen {
 				.end().repeat(Tween.INFINITY, 0).start(tweenManager);
 
 		// heading and buttons fade-in
-		Timeline.createSequence() 	
+		Timeline.createSequence()
 				.beginSequence()
 				.push(Tween.set(buttonPlay, ActorAccessor.ALPHA).target(0))
 				.push(Tween.set(buttonSettings, ActorAccessor.ALPHA).target(0))

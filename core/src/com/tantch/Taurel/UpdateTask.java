@@ -1,16 +1,17 @@
 package com.tantch.Taurel;
 
 import com.badlogic.gdx.utils.Timer;
-import com.tantch.Taurel.screens.MovementTestScreen;
+import com.tantch.Taurel.entities.Bird;
+import com.tantch.Taurel.screens.GameScreen;
 
 public class UpdateTask extends Timer {
-	public MovementTestScreen screen;
+	public GameScreen screen;
 
-	public UpdateTask(MovementTestScreen screen) {
+	public UpdateTask(GameScreen screen) {
 		super();
 		this.screen = screen;
 	}
-
+	
 	public void deStun(final int i){
 		Task tsk= new Task() {
 			
@@ -22,6 +23,17 @@ public class UpdateTask extends Timer {
 		};
 		
 		schedule(tsk, 0.5f);
+	}
+	public void changeDirection(final Bird bird,final float x,final float y){
+Task tsk= new Task() {
+			
+			@Override
+			public void run() {
+				bird.moveTo(x, y);				
+				
+			}
+		};
+		schedule(tsk, 1.7f);
 	}
 	
 }

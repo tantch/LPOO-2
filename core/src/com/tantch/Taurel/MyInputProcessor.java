@@ -2,12 +2,12 @@ package com.tantch.Taurel;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.tantch.Taurel.screens.MovementTestScreen;
+import com.tantch.Taurel.screens.GameScreen;
 
 public class MyInputProcessor implements InputProcessor {
-	MovementTestScreen screen;
+	GameScreen screen;
 
-	public MyInputProcessor(MovementTestScreen screen) {
+	public MyInputProcessor(GameScreen screen) {
 		this.screen = screen;
 	}
 

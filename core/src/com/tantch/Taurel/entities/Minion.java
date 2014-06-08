@@ -1,7 +1,5 @@
 package com.tantch.Taurel.entities;
 
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -10,36 +8,40 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.tantch.Taurel.B2DVars;
-import com.tantch.Taurel.screens.MovementTestScreen;
+import com.tantch.Taurel.screens.GameScreen;
 import com.tantch.utilities.MathUtilities;
 
 public class Minion {
 
 	public Body body;
+	String type;
 	private Fixture fixture;
-	private MovementTestScreen screen;
-	public final float SIZE;
+	private GameScreen screen;
 	public Vector2 velocity = new Vector2();
-	private float movementForce = 50;
+	private float movementForce = 60;
 	private float screenW, screenH;
 	private OrthographicCamera camera;
-	private float minDis = (float) 5.4;
+	private float minDis = (float) 7.4;
 	private float cx, cy;
-	private boolean stunned=false;
+	private boolean stunned = false;
 	private int order;
-	private static Sprite minionSprite;
+	private int frame = 0;
+	boolean right=true;
+	private Sprite minionSprite;
 
-	public Minion(World world, float x, float y, float size,
-			OrthographicCamera camera, int order, MovementTestScreen screen) {
-
+	public Minion(World world, float x, float y, String type,
+			OrthographicCamera camera, int order, GameScreen screen,
+			Texture text) {
+		this.type = type;
 		cx = x;
 		cy = y;
-		SIZE = size;
+		float size = 0;
 		this.screen = screen;
 		this.order = order;
 		this.camera = camera;
@@ -47,37 +49,79 @@ public class Minion {
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
+		if (type.equals("Normal"))
+			size = 3;
+		else if (type.equals("Guardian"))
+			size = 4.5f;
+		CircleShape shape = new CircleShape();
 
-		PolygonShape shape = new PolygonShape();
-		shape.setAsBox(SIZE / 2f, SIZE / 2f);
+		shape.setRadius(size / 2);
 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.filter.categoryBits = B2DVars.BIT_FIBI;
-		fixtureDef.filter.maskBits = B2DVars.BIT_OBS | B2DVars.BIT_CANNON | B2DVars.BIT_PICKUP;
+		fixtureDef.filter.maskBits = B2DVars.BIT_OBS | B2DVars.BIT_CANNON
+				| B2DVars.BIT_PICKUP | B2DVars.BIT_BIRD;
 		fixtureDef.restitution = 0.2f;
 		fixtureDef.friction = .8f;
 		fixtureDef.density = 3;
 
 		body = world.createBody(bodyDef);
 		fixture = body.createFixture(fixtureDef);
-		minionSprite = new Sprite(new Texture("img/mag.jpg"));
-
+		minionSprite = new Sprite(text);
+		updateSprite();
+		minionSprite.setSize(size, size);
 		body.setUserData(minionSprite);
-		fixture.setUserData("Minion " + order);
+		if (type.equals("Normal"))
+			fixture.setUserData("Minion " + order);
+		else if (type.equals("Guardian"))
+			fixture.setUserData("Guardian Minion " + order);
+
+	}
+
+	public void updateSprite() {
+		int tex = 0, tey = 0;
+		int tew, teh;
+		int iy=0;
+		frame++;
+		if (frame == 12)
+			frame = 0;
+		if(type.equals("Normal"))
+			iy=4;
+		else if(type.equals("Guardian"))
+			iy=106;
+		teh = tew = 32;
+		tex = (frame % 4) * 32 + 1;
+		tey = iy + (frame / 4) * 32;
+
+		if(velocity.x>0 && !right)
+			right=true;
+		
+		if(velocity.x<0 && right)
+			right=false;
+		
+		if(right)
+		minionSprite.setRegion(tex+tew, tey, -tew, teh);
+		else
+			minionSprite.setRegion(tex, tey, tew, teh);
+			
 	}
 
 	public void setOrder(int i) {
 		order = i;
-		fixture.setUserData("Minion " + order);
+		if (type.equals("Normal"))
+			fixture.setUserData("Minion " + order);
+		else if (type.equals("Guardian"))
+			fixture.setUserData("Guardian Minion " + order);
 	}
 
 	public void updateFollow(float cx, float cy) {
 		this.cx = cx;
 		this.cy = cy;
 	}
-	public void deStun(){
-		stunned=false;
+
+	public void deStun() {
+		stunned = false;
 	}
 
 	public void update() {
@@ -96,8 +140,8 @@ public class Minion {
 			velocity.x = 0;
 			velocity.y = 0;
 		}
-		if(!stunned)
-		body.setLinearVelocity(velocity);
+		if (!stunned)
+			body.setLinearVelocity(velocity);
 	}
 
 	public void moveTo(float screenX, float screenY, boolean conv) {
@@ -120,8 +164,8 @@ public class Minion {
 	}
 
 	public void stun() {
-		stunned=true;
-		
+		stunned = true;
+
 	}
 
 }

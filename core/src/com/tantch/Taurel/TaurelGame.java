@@ -1,13 +1,12 @@
 package com.tantch.Taurel;
 import com.badlogic.gdx.Game;
-import com.tantch.Taurel.screens.MovementTestScreen;
 import com.tantch.Taurel.screens.Splash;
 
 public class TaurelGame extends Game {
 	
 	@Override
 	public void create() {
-		setScreen(new MovementTestScreen());
+		setScreen(new Splash());
 		
 	}
 
