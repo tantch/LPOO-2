@@ -1,7 +1,5 @@
 package com.tantch.Taurel;
 
-
-
 import java.util.Vector;
 
 import com.badlogic.gdx.physics.box2d.World;
@@ -9,13 +7,14 @@ import com.tantch.Taurel.entities.Bird;
 import com.tantch.Taurel.entities.Block;
 import com.tantch.Taurel.entities.Cannon;
 import com.tantch.Taurel.entities.Coin;
+import com.tantch.Taurel.entities.Exit;
 import com.tantch.Taurel.entities.Minion;
 import com.tantch.Taurel.entities.Obstacle;
 import com.tantch.Taurel.entities.Wall;
 import com.tantch.Taurel.screens.GameScreen;
 
 public class Level {
-	
+
 	int levelId;
 	World world;
 	GameScreen screen;
@@ -24,16 +23,17 @@ public class Level {
 	private Vector<Obstacle> obstacles;
 	public Vector<Cannon> cannons;
 	public Vector<Bird> birds;
+	public Exit exit;
 
 	public Level(World world, GameScreen screen, int levelId) {
 		this.world = world;
 		this.screen = screen;
-		this.levelId=levelId;
-		coins=new Vector<Coin>();
-		minions=new Vector<Minion>();
-		obstacles=new Vector<Obstacle>();
-		cannons=new Vector<Cannon>();
-		birds=new Vector<Bird>();
+		this.levelId = levelId;
+		coins = new Vector<Coin>();
+		minions = new Vector<Minion>();
+		obstacles = new Vector<Obstacle>();
+		cannons = new Vector<Cannon>();
+		birds = new Vector<Bird>();
 	}
 
 	public int getLevelId() {
@@ -64,30 +64,30 @@ public class Level {
 		return birds;
 	}
 
-	public void addMinion(float x, float y,String type, int order) {
+	public void addMinion(float x, float y, String type, int order) {
 
-		minions.add(new Minion(world, x, y,type, screen.camera, order, screen,
+		minions.add(new Minion(world, x, y, type, screen.camera, order, screen,
 				screen.fibiText));
 	}
 
 	public void addWall(float x, float y, float size, boolean vertical) {
 		obstacles.add(new Wall(world, x, y, size, screen.camera, screen,
-				vertical));
+				vertical, screen.wallText));
 
 	}
 
 	public void addBlock(float x, float y, float size) {
 		obstacles.add(new Block(world, x, y, size, screen.camera, screen,
-				screen.blockText));
+				screen.wallText));
 	}
 
 	public void addCannon(float x, float y, float ang) {
-		cannons.add(new Cannon(x, y, ang, world,screen.cannonText));
+		cannons.add(new Cannon(x, y, ang, world, screen.cannonText));
 	}
 
 	public void addCoin(float x, float y) {
 
-		coins.add(new Coin(world, x, y,screen.coinText));
+		coins.add(new Coin(world, x, y, screen.coinText));
 	}
 
 	public void addBird(float x, float y, float vx, float vy) {
@@ -96,15 +96,22 @@ public class Level {
 	}
 
 	public void createBox(float w, float h) {
-		obstacles
-				.add(new Wall(world, -w / 2, 0, h, screen.camera, screen, true));
-		obstacles
-				.add(new Wall(world, w / 2, 0, h, screen.camera, screen, true));
+		obstacles.add(new Wall(world, -w / 2, 0, h, screen.camera, screen,
+				true, screen.wallText));
+		obstacles.add(new Wall(world, w / 2, 0, h, screen.camera, screen, true,
+				screen.wallText));
 		obstacles.add(new Wall(world, 0, -h / 2, w, screen.camera, screen,
-				false));
-		obstacles
-				.add(new Wall(world, 0, h / 2, w, screen.camera, screen, false));
+				false, screen.wallText));
+		obstacles.add(new Wall(world, 0, h / 2, w, screen.camera, screen,
+				false, screen.wallText));
 
+	}
+	public void addExit(float x,float y){
+		exit = new Exit(world,x,y,screen.exitText);
+	}
+
+	public Exit getExit() {
+		return exit;
 	}
 
 }

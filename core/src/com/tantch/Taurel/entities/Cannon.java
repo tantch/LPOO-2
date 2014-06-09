@@ -48,7 +48,8 @@ public class Cannon {
 		fixture.setUserData("Cannon");
 		cannonSprite = new Sprite(cannonText);
 		cannonSprite.setSize(6, 6);
-		cannonSprite.setOrigin(body.getLocalCenter().x+3,body.getLocalCenter().y+3);
+		//cannonSprite.setOrigin(body.getLocalCenter().x+3,body.getLocalCenter().y+3);
+		cannonSprite.setOriginCenter();
 		updateSprite();
 		body.setUserData(cannonSprite);
 		

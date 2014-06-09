@@ -1,6 +1,8 @@
 package com.tantch.Taurel.entities;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -12,8 +14,8 @@ import com.tantch.Taurel.screens.GameScreen;
 public class Wall extends Obstacle {
 
 	public Wall(World world, float x, float y, float size,
-			OrthographicCamera camera, GameScreen screen,
-			boolean vertical) {
+			OrthographicCamera camera, GameScreen screen, boolean vertical,
+			Texture wallText) {
 
 		cx = x;
 		cy = y;
@@ -24,17 +26,18 @@ public class Wall extends Obstacle {
 		bodyDef.type = BodyType.StaticBody;
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
-
 		PolygonShape shape = new PolygonShape();
-		if (vertical)
-			shape.setAsBox(0.2f, SIZE / 2f);
-		else
-			shape.setAsBox(SIZE / 2f, 0.2f);
+		if (vertical){
+			shape.setAsBox(3, SIZE / 2f);
+		System.out.println(SIZE);
+	}		else
+			shape.setAsBox(SIZE / 2f, 3);
 
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.filter.categoryBits = B2DVars.BIT_OBS;
-		fixtureDef.filter.maskBits = B2DVars.BIT_FIBI | B2DVars.BIT_BIRD | B2DVars.BIT_OBS ;
+		fixtureDef.filter.maskBits = B2DVars.BIT_FIBI | B2DVars.BIT_BIRD
+				| B2DVars.BIT_OBS;
 		fixtureDef.restitution = 0f;
 		fixtureDef.friction = 1f;
 		fixtureDef.density = 6;
@@ -42,6 +45,17 @@ public class Wall extends Obstacle {
 		body = world.createBody(bodyDef);
 		fixture = body.createFixture(fixtureDef);
 		fixture.setUserData("Wall");
+		cloudSprite = new Sprite(wallText);
+		cloudSprite.setRegion(0, 0, 465, 22);
+		if (vertical) {
+			cloudSprite.setSize(7, size);
+			cloudSprite.rotate90(false);
+
+		}
+		else
+			cloudSprite.setSize(size, 7);
+
+		body.setUserData(cloudSprite);
 	}
 
 }

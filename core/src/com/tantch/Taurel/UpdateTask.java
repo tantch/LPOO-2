@@ -1,8 +1,11 @@
 package com.tantch.Taurel;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Timer;
 import com.tantch.Taurel.entities.Bird;
 import com.tantch.Taurel.screens.GameScreen;
+import com.tantch.Taurel.screens.MainMenu;
 
 public class UpdateTask extends Timer {
 	public GameScreen screen;
@@ -34,6 +37,20 @@ Task tsk= new Task() {
 			}
 		};
 		schedule(tsk, 1.7f);
+	}
+	public void end(){
+		Task tsk= new Task() {
+			
+			@Override
+			public void run() {
+			
+				((Game) Gdx.app.getApplicationListener())
+				.setScreen(new MainMenu());
+	
+				
+			}
+		};
+		schedule(tsk,5f);
 	}
 	
 }

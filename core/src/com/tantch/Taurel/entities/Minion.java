@@ -53,6 +53,8 @@ public class Minion {
 			size = 3;
 		else if (type.equals("Guardian"))
 			size = 4.5f;
+		else if (type.equals("Shield"))
+			size = 3.5f;
 		CircleShape shape = new CircleShape();
 
 		shape.setRadius(size / 2);
@@ -76,6 +78,8 @@ public class Minion {
 			fixture.setUserData("Minion " + order);
 		else if (type.equals("Guardian"))
 			fixture.setUserData("Guardian Minion " + order);
+		else if (type.equals("Shield"))
+			fixture.setUserData("Shield Minion " + order);
 
 	}
 
@@ -90,6 +94,8 @@ public class Minion {
 			iy=4;
 		else if(type.equals("Guardian"))
 			iy=106;
+		else if(type.equals("Shield"))
+			iy=519;
 		teh = tew = 32;
 		tex = (frame % 4) * 32 + 1;
 		tey = iy + (frame / 4) * 32;
@@ -113,6 +119,8 @@ public class Minion {
 			fixture.setUserData("Minion " + order);
 		else if (type.equals("Guardian"))
 			fixture.setUserData("Guardian Minion " + order);
+		else if (type.equals("Shield"))
+			fixture.setUserData("Shield Minion " + order);
 	}
 
 	public void updateFollow(float cx, float cy) {

@@ -32,12 +32,15 @@ public class MyContactListener implements ContactListener, ContactFilter {
 		String sta = (String) fa.getUserData();
 		String stb = (String) fb.getUserData();
 
-		if (sta.contains("Minion") && stb.equals("Button")) {
+		if (sta.contains("Minion") && stb.equals("Exit"))
+			minionReachExit();
+		else if (stb.contains("Minion") && sta.equals("Exit"))
+			minionReachExit();
+		else if (sta.contains("Minion") && stb.equals("Button")) {
 			activateButton();
 		} else if (stb.contains("Minion") && sta.equals("Button")) {
 			activateButton();
-		}
-		if (sta.contains("Minion") && stb.equals("Coin")) {
+		} else if (sta.contains("Minion") && stb.equals("Coin")) {
 			catchCoin(fa, fb);
 		} else if (stb.contains("Minion") && sta.equals("Coin")) {
 			catchCoin(fb, fa);
@@ -124,10 +127,10 @@ public class MyContactListener implements ContactListener, ContactFilter {
 	public void arrowHitMinion(Fixture minion, Fixture arrow) {
 
 		arrow.getBody().setUserData("delete");
-		if(!((String) minion.getUserData()).contains("Guardian")){
-		minion.getBody().setUserData("delete");
-		String s = (String) minion.getUserData();
-		screen.deleteMinion(Integer.parseInt(s.replaceAll("[\\D]", "")));
+		if (!((String) minion.getUserData()).contains("Guardian")) {
+			minion.getBody().setUserData("delete");
+			String s = (String) minion.getUserData();
+			screen.deleteMinion(Integer.parseInt(s.replaceAll("[\\D]", "")));
 		}
 	}
 
@@ -141,6 +144,7 @@ public class MyContactListener implements ContactListener, ContactFilter {
 	public void catchCoin(Fixture Minion, Fixture Coin) {
 
 		Coin.getBody().setUserData("delete");
+		screen.coins++;
 
 	}
 
@@ -153,6 +157,10 @@ public class MyContactListener implements ContactListener, ContactFilter {
 		UpdateTask upd = new UpdateTask(screen);
 		upd.deStun(Integer.parseInt(stmp.replaceAll("[\\D]", "")) - 1);
 
+	}
+
+	public void minionReachExit() {
+		screen.end();
 	}
 
 	/*
@@ -173,9 +181,11 @@ public class MyContactListener implements ContactListener, ContactFilter {
 	}
 
 	public void birdAttackMinion(Fixture minion, Fixture bird) {
-		minion.getBody().setUserData("delete");
-		String s = (String) minion.getUserData();
-		screen.deleteMinion(Integer.parseInt(s.replaceAll("[\\D]", "")));
+		if (!((String) minion.getUserData()).contains("Shield")) {
+			minion.getBody().setUserData("delete");
+			String s = (String) minion.getUserData();
+			screen.deleteMinion(Integer.parseInt(s.replaceAll("[\\D]", "")));
+		}
 	}
 
 	@Override
