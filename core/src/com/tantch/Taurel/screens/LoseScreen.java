@@ -1,43 +1,19 @@
 package com.tantch.Taurel.screens;
 
-import aurelienribon.tweenengine.BaseTween;
-import aurelienribon.tweenengine.Timeline;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
-import aurelienribon.tweenengine.TweenManager;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.Array;
-import com.tantch.Taurel.HighScore;
-import com.tantch.Taurel.Player;
-import com.tantch.Taurel.tween.ActorAccessor;
 
-public class RoundScore implements Screen {
+public class LoseScreen implements Screen {
 	private Stage stage;
 	private Table table;
 	private Skin skin;
-	private float score;
-/**
- * show the result of the won game
- * @param score2 the score of the game
- */
-	public RoundScore(float score2) {
-		score = score2;
-	}
+
 
 	@Override
 	public void render(float delta) {
@@ -66,12 +42,10 @@ public class RoundScore implements Screen {
 		table.setFillParent(true);
 
 		// setting header
-		Label heading = new Label("Final Score", skin, "big");
-		heading.setFontScale(2);
-		Label heading2 = new Label("" + score, skin, "big");
+		Label heading = new Label("You Lose!", skin, "big");
 
-		table.add(heading).colspan(3).expandX().spaceBottom(50).row();;
-		table.add(heading2);
+		table.add(heading).colspan(3).expandX().spaceBottom(50).row();
+		;
 		stage.addActor(table);
 
 	}
@@ -99,5 +73,4 @@ public class RoundScore implements Screen {
 		// TODO Auto-generated method stub
 
 	}
-
 }

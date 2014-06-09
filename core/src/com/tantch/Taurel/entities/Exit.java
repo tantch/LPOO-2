@@ -17,7 +17,13 @@ public class Exit {
 	private int frame;
 	private Fixture fixture;
 	private Sprite exitSprite;
-
+/**
+ * creates an exit and initializes it in the world
+ * @param world where it is placed
+ * @param x the horizontal center position
+ * @param y the vertical center position
+ * @param exitText the flag texture image representing the exit
+ */
 	public Exit(World world, float x, float y, Texture exitText) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.KinematicBody;
@@ -44,7 +50,9 @@ public class Exit {
 
 		fixture.setUserData("Exit");
 	}
-
+/**
+ * updates the sprite being drawn making it shake
+ */
 	public void updateSprite() {
 		int tex = 0, tey = 5;
 		int tew, teh;

@@ -13,7 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.tantch.Taurel.Player;
 
-public class LevelScreen implements Screen{
+public class LevelScreen implements Screen {
 
 	private Table table;
 	private Stage stage;
@@ -21,9 +21,15 @@ public class LevelScreen implements Screen{
 	private TextButton button;
 	private Player player;
 
+	/**
+	 * creates a map with the levels and the player access permittions
+	 * 
+	 * @param player
+	 */
 	public LevelScreen(Player player) {
-		this.player=player;
+		this.player = player;
 	}
+
 	@Override
 	public void render(float delta) {
 		Gdx.gl.glClearColor(0.15f, 0.15f, 0.15f, 1);
@@ -31,20 +37,20 @@ public class LevelScreen implements Screen{
 
 		stage.act(delta);
 		stage.draw();
-		
+
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void show() {
 		stage = new Stage();
 
-		Gdx.input.setInputProcessor(stage);	
+		Gdx.input.setInputProcessor(stage);
 
 		skin = new Skin(Gdx.files.internal("ui/menuSkin.json"),
 				new TextureAtlas("ui/atlas.pack"));
@@ -52,20 +58,20 @@ public class LevelScreen implements Screen{
 		table = new Table(skin);
 		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
-		//adding the buttons
-		for(int i = 1; i < 6; i++) {
+		// adding the buttons
+		for (int i = 1; i < 5; i++) {
 
 			final int level = i;
 			String levelT;
 
-			if (player.currentLevel >= i ) {
+			if (player.currentLevel >= i) {
 				levelT = Integer.toString(i);
 				button = new TextButton(levelT, skin);
 				button.addListener(new ClickListener() {
 					@Override
 					public void clicked(InputEvent event, float x, float y) {
 						((Game) Gdx.app.getApplicationListener())
-						.setScreen(new GameScreen(player,level));
+								.setScreen(new GameScreen(player, level));
 					}
 				});
 			} else {
@@ -77,31 +83,31 @@ public class LevelScreen implements Screen{
 		}
 
 		stage.addActor(table);
-		
+
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -9,18 +9,18 @@ public class HighScore {
 		levelId=0;
 		score=0;
 	}
+	/**
+	 * Initiates a highscore for a level
+	 * @param levelId the id of the level
+	 * @param score2 the score made
+	 */
 	public HighScore(int levelId,float score2){
 		this.levelId = levelId;
 		this.score = score2;
 		
 	}
-
 	
-
-	
-
-
-
+	  
 	
 	@Override
 	public String toString() {
@@ -41,6 +41,10 @@ public class HighScore {
 		}
 		return true;
 	}
+	/**
+	 * sets score to the biggest score between the given and the actual
+	 * @param score2 the new score
+	 */
 	public void setScore(float score2) {
 		
 		if(this.score<score2){

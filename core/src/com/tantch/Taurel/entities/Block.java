@@ -12,7 +12,16 @@ import com.tantch.Taurel.B2DVars;
 import com.tantch.Taurel.screens.GameScreen;
 
 public class Block extends Obstacle {
-
+/**
+ * Creates a block and initializes it in the world
+ * @param world the world where it is created
+ * @param x the horizontal center of the position
+ * @param y the vertical center of the position
+ * @param size the size of side of the block
+ * @param camera the camera being used
+ * @param screen the screen being showed
+ * @param text the texture image of the block
+ */
 	public Block(World world, float x, float y, float size,
 			OrthographicCamera camera, GameScreen screen, Texture text) {
 

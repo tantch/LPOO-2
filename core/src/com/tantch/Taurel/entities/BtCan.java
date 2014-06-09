@@ -14,7 +14,12 @@ public class BtCan {
 	private World world;
 	public Body body;
 	private Fixture fixture;
-	
+	/**
+	 * the button who controls the spinning of the cannons
+	 * @param world the world where it is created
+	 * @param x the horizontal center position
+	 * @param y the vertical center position
+	 */
 	public BtCan(World world, float x, float y) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.KinematicBody;

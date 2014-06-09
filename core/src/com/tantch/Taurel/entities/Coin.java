@@ -17,7 +17,13 @@ public class Coin {
 	private int frame;
 	private Fixture fixture;
 	private Sprite coinSprite;
-
+/**
+ * creates and initiates a coin
+ * @param world the world where it is created
+ * @param x the horizontal center position
+ * @param y the vertical center position
+ * @param coinText the coin texture image
+ */
 	public Coin(World world, float x, float y,Texture coinText) {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.KinematicBody;
@@ -44,6 +50,9 @@ public class Coin {
 
 		fixture.setUserData("Coin");
 	}
+	/**
+	 * updates the sprite being drawn making it spin
+	 */
 	public void updateSprite() {
 		int tex = 0, tey = 0;
 		int tew, teh;

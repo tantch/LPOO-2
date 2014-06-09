@@ -24,7 +24,16 @@ public class Bird {
 	public Vector2 velocity = new Vector2();
 	private float movementForce = 20;
 	private Sprite birdSprite;
-
+/**
+ * Creates a bird and initializes it in the world
+ * @param world the world where it is created
+ * @param x the horizontal center position
+ * @param y the vertical center position
+ * @param bx the x component of the movement vector
+ * @param by the y component of the movement vector
+ * @param text the bird texture image 
+ * @param screen the screen being played
+ */
 	public Bird(World world, float x, float y, float bx, float by,
 			Texture text, GameScreen screen) {
 
@@ -55,7 +64,9 @@ public class Bird {
 		task = new UpdateTask(screen);
 		moveTo(bx, by);
 	}
-
+/*
+ * updates the sprite depending on the current frame
+ */
 	public void updateSprite() {
 		int tex = 0, tey = 0;
 		int tew = 46, teh = 31;
@@ -89,12 +100,18 @@ public class Bird {
 		else
 			birdSprite.setRegion(tex + tew, tey, -tew, teh);
 	}
-
+/**
+ * applies a constant force to make the bird fly
+ */
 	public void update() {
 
 		body.applyForceToCenter(new Vector2(0, 20f * body.getMass()), true);
 	}
-
+/**
+ * Moves the bird according the given movement vector
+ * @param cx the horizontal component of the movement vector
+ * @param cy the vertical component of the movement vector
+ */
 	public void moveTo(float cx, float cy) {
 		float bx = body.getPosition().x;
 		float by = body.getPosition().y;

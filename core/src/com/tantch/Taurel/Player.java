@@ -15,12 +15,19 @@ public class Player {
 
 	}
 
+	/**
+	 * initializes a valid player
+	 * @param nome the name of the player
+	 */
 	public Player(String nome) {
 		this.nome = nome;
 		currentLevel = 1;
 		highscores = new Vector<HighScore>();
 	}
-
+/**
+ * adds or updates a player's highscore on a level
+ * @param highscore the highscore made
+ */
 	public void addScore(HighScore highscore) {
 		if (highscore.levelId >= currentLevel)
 			currentLevel = highscore.levelId + 1;

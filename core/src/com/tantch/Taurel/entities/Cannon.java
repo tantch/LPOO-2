@@ -22,7 +22,14 @@ public class Cannon {
 	
 	
 	Sprite cannonSprite;
-
+	/**
+	 * Creates a cannon and initializes it
+	 * @param x the horizontal center position 
+	 * @param y the vertical center position
+	 * @param ang the angle in which it is turned being 0 faced upwards
+	 * @param world the world in which it is created
+	 * @param cannonText the cannon texture image
+	 */
 	public Cannon(float x, float y, float ang, World world,Texture cannonText) {
 
 		
@@ -55,11 +62,17 @@ public class Cannon {
 		
 
 	}
+	/**
+	 * updates the cannon drawing
+	 */
 	public void updateSprite() {
 		cannonSprite.setRegion(31,18, 100, 100);
 		cannonSprite.rotate(500);
 	}
-
+/**
+ * creates and fires and arrow from the cannon
+ * @param arrowText the image texture of the cannon
+ */
 	public void fireArrow(Texture arrowText) {
 		float ang = (float) (body.getAngle() + Math.PI / 2);
 

@@ -12,7 +12,26 @@ import com.tantch.Taurel.B2DVars;
 import com.tantch.Taurel.screens.GameScreen;
 
 public class Wall extends Obstacle {
-
+	/**
+	 * Creates and initializes a wall in the world
+	 * 
+	 * @param world
+	 *            the world where it is initiated
+	 * @param x
+	 *            the horizontal center position
+	 * @param y
+	 *            the vertical center position
+	 * @param size
+	 *            the size of the wall
+	 * @param camera
+	 *            the camera being used
+	 * @param screen
+	 *            the screen being used
+	 * @param vertical
+	 *            if vertical
+	 * @param wallText
+	 *            the image texture of the wall
+	 */
 	public Wall(World world, float x, float y, float size,
 			OrthographicCamera camera, GameScreen screen, boolean vertical,
 			Texture wallText) {
@@ -27,10 +46,10 @@ public class Wall extends Obstacle {
 		bodyDef.position.set(x, y);
 		bodyDef.fixedRotation = true;
 		PolygonShape shape = new PolygonShape();
-		if (vertical){
+		if (vertical) {
 			shape.setAsBox(3, SIZE / 2f);
-		System.out.println(SIZE);
-	}		else
+			System.out.println(SIZE);
+		} else
 			shape.setAsBox(SIZE / 2f, 3);
 
 		FixtureDef fixtureDef = new FixtureDef();
@@ -51,8 +70,7 @@ public class Wall extends Obstacle {
 			cloudSprite.setSize(7, size);
 			cloudSprite.rotate90(false);
 
-		}
-		else
+		} else
 			cloudSprite.setSize(size, 7);
 
 		body.setUserData(cloudSprite);

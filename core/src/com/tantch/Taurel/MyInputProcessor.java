@@ -7,6 +7,10 @@ import com.tantch.Taurel.screens.GameScreen;
 public class MyInputProcessor implements InputProcessor {
 	GameScreen screen;
 
+	/**
+	 * initializes the input processor
+	 * @param screen the screen where it is activated
+	 */
 	public MyInputProcessor(GameScreen screen) {
 		this.screen = screen;
 	}

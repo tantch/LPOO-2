@@ -35,7 +35,10 @@ public class HighScores implements Screen {
 	private Skin skin;
 	private Player player;
 	private TweenManager tweenManager;
-
+/**
+ * loads a player high scores
+ * @param player2
+ */
 	public HighScores(Player player2) {
 		player = player2;
 	}

@@ -113,16 +113,20 @@ public class MyContactListener implements ContactListener, ContactFilter {
 
 	}
 
-	/*
+	/**
+	 * 
 	 * Manages collision of arrows with Walls and obstacles
+	 * 
+	 * @param arrow the arrow who hit the wall
 	 */
-
 	public void arrowHitWall(Fixture arrow) {
 		arrow.getBody().setUserData("delete");
 	}
 
-	/*
+	/**
 	 * Manages collision between arrows and minions
+	 * @param minion the minion who collided
+	 * @param arrow the arrow which collided
 	 */
 	public void arrowHitMinion(Fixture minion, Fixture arrow) {
 
@@ -133,13 +137,18 @@ public class MyContactListener implements ContactListener, ContactFilter {
 			screen.deleteMinion(Integer.parseInt(s.replaceAll("[\\D]", "")));
 		}
 	}
-
+	/**
+	 * activates the rotation of the cannons
+	 */
 	public void activateButton() {
 		screen.rotateCannons();
 	}
 
-	/*
+	
+	/**
 	 * Manages the colision of a minion catching a coin
+	 * @param Minion the minion who collided
+	 * @param Coin the coin which was caught
 	 */
 	public void catchCoin(Fixture Minion, Fixture Coin) {
 
@@ -148,8 +157,11 @@ public class MyContactListener implements ContactListener, ContactFilter {
 
 	}
 
-	/*
-	 * Manages the colision of a minion hitting the wall which breafly stuns him
+	
+	/**
+	 * Manages the collision of a minion hitting the wall which breafly stuns him
+	 * @param minion the minion who collided
+	 * @param wall the wall wich was hit
 	 */
 	public void minionHitWall(Fixture minion, Fixture wall) {
 		String stmp = (String) minion.getUserData();
@@ -159,27 +171,20 @@ public class MyContactListener implements ContactListener, ContactFilter {
 
 	}
 
-	public void minionReachExit() {
-		screen.end();
-	}
-
-	/*
-	 * Manages the rotation of the cannons
+	/**
+	 * end the game when minion reaches the exit
 	 */
-	public void moveCannon(Fixture Cannon, boolean clock, boolean move) {
-		if (!move) {
-			Cannon.getBody().setAngularVelocity(0);
-
-			return;
-		}
-
-		if (clock)
-			Cannon.getBody().setAngularVelocity(-2);
-		else
-			Cannon.getBody().setAngularVelocity(2);
-
+	public void minionReachExit() {
+		screen.end(false);
 	}
 
+	
+	
+/**
+ * Manages collisions of birds with different types of minions
+ * @param minion the minion who collided
+ * @param bird	the bird who collided
+ */
 	public void birdAttackMinion(Fixture minion, Fixture bird) {
 		if (!((String) minion.getUserData()).contains("Shield")) {
 			minion.getBody().setUserData("delete");
